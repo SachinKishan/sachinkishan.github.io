@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sachin Arvind Kishan - Academic Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            height: 100%;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header, footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            background-color: #34495e;
+            padding: 0.5rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        nav a:hover {
+            background-color: #4a6785;
+        }
+        main {
+            display: flex;
+            flex-grow: 1;
+            background-color: white;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: #ecf0f1;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .section {
+            display: none;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .section.active {
+            display: block;
+        }
+        h1 { 
+            color: white
+        }
+        h2, h3 {
+            color: #2c3e50;
+        }
+        h2 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+        .experience {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sachin Arvind Kishan</h1>
+            <p>B.Tech - Computer Science and Engineering</p>
+        </header>
+        <nav>
+            <a href="#" onclick="showSection('who-am-i')">Who am I?</a>
+            <a href="#" onclick="showSection('education')">Education</a>
+            <a href="#" onclick="showSection('experience')">Experience</a>
+            <a href="#" onclick="showSection('projects')">Projects</a>
+            <a href="#" onclick="showSection('skills')">Skills</a>
+            <a href="#" onclick="showSection('achievements')">Achievements</a>
+            <a href="#" onclick="downloadCV()">Resume</a>
+        </nav>
+        <main>
+            <div class="content">
+                <section id="who-am-i" class="section active">
+                    <h2>Who am I?</h2>
+                    <div style="display: flex; align-items: center;">
+                        <img src="Sachin-Kishan-PHOTO.png" alt="Sachin Arvind Kishan" style="margin-right: 2rem; border-radius: 50%;">
+                        <div>
+                            <p>I am a recent undergraduate in computer science from India.</p>
+                            <p>I have experience in programming for games, graphics and simulations.</p>
+                            <p>Email: sachinkishan02@gmail.com</p>
+                            <p><a href="https://github.com/SachinKishan" target="_blank">GitHub</a> | <a href="https://www.linkedin.com/in/sachin-kishan-graphics/" target="_blank">LinkedIn</a></p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="education" class="section">
+                    <h2>Education</h2>
+                    <table>
+                        <tr>
+                            <th>Degree/Certificate</th>
+                            <th>Institute/Board</th>
+                            <th>CGPA/Percentage</th>
+                            <th>Year</th>
+                        </tr>
+                        <tr>
+                            <td>B.Tech.CSE</td>
+                            <td>Vellore Institute of Technology</td>
+                            <td>8.70 </td>
+                            <td>2020-2024</td>
+                        </tr>
+                        <tr>
+                            <td>High School</td>
+                            <td>CBSE Board(India)</td>
+                            <td>91.0%</td>
+                            <td>2020</td>
+                        </tr>
+                    </table>
+                </section>
+                
+                <section id="experience" class="section">
+                    <h2>Career Experience</h2>
+                    <div class="experience">
+                        <h3>Massachusetts Institute of Technology - Summer Geometry Initiative</h3>
+                        <p><strong>Research Fellow</strong> | Remote | Jul. 2024 - Aug. 2024</p>
+                        <p>6 weeks of intensive geometry processing research, working with researchers from MIT, Stanford and Delft.</p>
+                        <p>This program had a 3-4% acceptance rate.</p>
+                        <ul>
+                            <li>Researched and programmed a prototype of splines whose arc length can be calculated analytically while retaining continuity properties</li>
+                            <li>Researched and implemented GPU applied geometry processing applications using RXMesh. <a href="https://github.com/owensgroup/RXMesh/blob/main/apps/ARAP/arap.cu" target="_blank">GitHub link</a></li>
+                            <li>Researched and implemented global intersection analysis, a cloth collision resolution technique. <a href="https://github.com/sara-samy/global_intersection_analysis_sgi2024" target="_blank">GitHub link</a></li>
+                            <li>Implemented an open source shadertoy and web viewer for Chladni Patterns. <a href="https://github.com/CDInstitute/3DChladni" target="_blank">GitHub link</a></li>
+                        </ul>
+                    </div>
+                    <div class="experience">
+                        <h3>Mimyk (IISC incubated deep tech company)</h3>
+                        <p><strong>Research Intern</strong> | Bangalore | Jan. 2024 - Jul. 2024</p>
+                        <p>Developed a working implementation and verification of a patent in C++ from scratch, combining FEM and XPBD methods for real-time simulation and rendering for soft bodies in haptic simulations aimed to run at 1000 frames per second.</p>
+                        <p>The patent can be seen here: <a href="https://patents.google.com/patent/US20230061175A1/en" target="_blank">Patent link</a> </p>
+                    </div>
+                    <div class="experience">
+                        <h3>DevLaunchers (Non-profit)</h3>
+                        <p><strong>Game Developer for DevBots</strong> | Remote | Oct. 2021 - Jul. 2022</p>
+                        <ul>
+                            <li>Developed a modular ability system in Unity using Scriptable Objects that cut down development time and allowed for greater focus on game design for customized features. Made a week-long endeavor into an hour-long task.</li>
+                            <li>Developed an animation system and art asset pipeline for artists to test and integrate animation into the game.</li>
+                            <li>Extensively documented code and usage for designers and future contributors.</li>
+                            <li>Aided the development of a modular collision system that could easily be used anywhere for game-play features needing collisions.</li>
+                            <li>All the source code and the many write-ups I did for documentation are <a href="https://github.com/dev-launchers/devbots__general/wiki" target="_blank">here</a>. </li>
+                        </ul>
+                    </div>
+                    <div class="experience">
+                        <h3>
+                            <a href="https://www.ncoregames.com/"></a>
+                            Studio nCore Pvt. Ltd
+                        </a>
+                        </h3>
+                        <p><strong>Game Developer Internship</strong> | Remote | June 2022 - Jul. 2022</p>
+                        <ul>
+                            <li>Was assigned under the team working on a Disney-funded project.</li>
+                            <li>I worked a on their flagship cricketing game, a Disney-funded project. I implemented a simple daily rewards game design tool that could be used in a variety of different games as a Unity package. This allowed designers to easily add it to their games and provide varying rewards to users when they login to their games based on certain parameters. </li>
+                            <li>Developed multiplayer game prototypes in Unity using the Photon framework.</li>
+                        </ul>
+                    </div>
+                    <div class="experience">
+                        <h3>P1 (Non-profit)</h3>
+                        <p><strong>Remote Game Developer (Part Time)</strong> | June 2023 - Dec. 2023</p>
+                        <ul>
+                            <li>Researched methods to optimize mesh generation and rendering for large dynamic voxel worlds.</li>
+                            <li>Worked on several gameplay-related tasks and bugs within a large developed code base.</li>
+                            <li>Worked closely with artists to fix model and UV mapping issues for shader development within Unity.</li>
+                            <li>Introduced and guided at least 20 new members to join and start contributing to the programming team.</li>
+                            <li>All the source code I made for documentation are <a href="https://github.com/dev-launchers/devbots__general/wiki" target="_blank">here</a>. </li>
+                        </ul>
+                    </div>
+                </section>
+                
+                <section id="projects" class="section">
+                    <h2>Projects</h2>
+                    <div class="experience">
+                        <h3>Narrative Game Engine (C++)</h3>
+                        <p>A game engine written in C++ that acts as a tool for writers to create interactive narrative games in 3D worlds easily. </p>
+                        <p>Features an event system, OpenGL renderer, file scene saving system, scene editing and more in development.</p>
+                        <p>The game engine is currently open source, and taking in contributions.</p>
+                        <p>
+                            <strong>Why open source? </strong><br>
+                            My undergraduate institution had very little games and graphics work, especially when it came to developing systems for native applications. My goal in open sourcing the game engine is to provide greater access to learning and developing an application. At the moment, I actively mentor and support anyone who wants to contribute.
+                        </p>
+                        
+                        <p><a href="https://github.com/SachinKishan/Narrative-Engine" target="_blank">GitHub link</a></p>
+                    </div>
+                    <div class="experience">
+                        <h3>Rasterizer (C++)</h3>
+                        <p>C++ rasterizer which includes camera clipping, renders cubes at different orientations and transforms, matrix operations library.</p>
+                        <p>
+                            <strong>Why?</strong><br>
+                            The main goal of developing the simple rasteriser was to learn the fundamental ideas involved in drawing pixels as well as how I could organise a basic rendering framework.
+                        </p>
+                        <p><a href="https://github.com/SachinKishan/Rasteriser" target="_blank">GitHub link</a></p>
+                    </div>
+                    <div class="experience">
+                        <h3>Ray Tracer (C++)</h3>
+                        <p>Wrote a Monte Carlo path tracer from scratch. Can apply different materials on spheres such as metals, diffuse objects and semi-transparent objects. Includes point lights, area lights, shadows, and supports multiple lights in a single scene.</p>
+                        <p><a href="https://github.com/SachinKishan/RT" target="_blank">GitHub link</a></p>
+                    </div>
+                </section>
+                
+                <section id="skills" class="section">
+                    <h2>Technical Skills</h2>
+                    <ul>
+                        <li><strong>Programming:</strong> C#, C, C++, HLSL, Python</li>
+                        <li><strong>Graphics APIs:</strong> OpenGL </li>
+                        <li><strong>Mathematics:</strong> Linear algebra, Calculus, Differential Calculus, Physics programming</li>
+                    </ul>
+                </section>
+                
+                <section id="achievements" class="section">
+                    <h2>Achievements</h2>
+                    <ul>
+                        <li><strong>MIT SGI Fellow(2024):</strong> A research fellowship awarded for students to take part in 6 weeks of intensive geoemtry processing research. </li>
+                        <li><strong>IGDAF Scholar (2023):</strong> Awarded to students showing potential for a career in game development. Only 3% of total applicants receive the award.</li>
+                        <li><strong>IGDAF Alumni GDC Scholarship (2024):</strong> Invited with an all-access complimentary pass to Game Developers Conference in 2024.</li>
+                        <li><strong>SGI Training Week (2023):</strong> Invited to the training week of SGI - a summer school hosted by MIT that teaches the foundations of geometry processing (was accepted to the entire program in the 2024 cohort).</li>
+                        <li><strong>VIT Chancellor's Special Achiever Award (2021):</strong> Awarded to 0.5% of students in VIT for outstanding achievement in college representation at events.</li>
+                    </ul>
+                    <h3>Extra Curricular Roles and Achievements</h3>
+                    <ul>
+                        <li><strong>Equity Committee Role:</strong> Served as a dedicated member of the Vellore Institute of Technology's Debate Society's Equity Committee.</li>
+                        <ul>
+                            <li>Actively involved in conflict resolution and prevention between different parties and groups within the society, especially over contentious actions and discussions involving identity.</li>
+                            <li>Held sessions for new members, introducing them to the concept of equity and navigating contentious discussion while not using identity and ad-hominem as a basis for argument and discourse.</li>
+                        </ul>
+                        <li><strong>Breaking Team at UADC:</strong> 
+                        
+                            Part of the second highest-ranked Indian team in UADC (Asia's largest debate tournament) in 2021 and the first to get to knockout rounds from VIT.</li>
+                    </ul>
+                </section>
+            </div>
+        </main>
+        <footer>
+            <p>&copy; 2024 Sachin Arvind Kishan. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            const sections = document.getElementsByClassName('section');
+            for (let section of sections) {
+                section.classList.remove('active');
+            }
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function downloadCV() {
+            window.location.href = 'General_Resume.pdf';
+        }
+    </script>
+</body>
+</html>
