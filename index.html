@@ -1,305 +1,389 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sachin Arvind Kishan - Academic Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Roboto', sans-serif;
-            height: 100%;
-            color: #333;
-            background-color: #f5f5f5;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        header, footer {
-            background-color: #2c3e50;
-            color: white;
-            padding: 1rem;
-        }
-        nav {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            background-color: #34495e;
-            padding: 0.5rem;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        nav a:hover {
-            background-color: #4a6785;
-        }
-        main {
-            display: flex;
-            flex-grow: 1;
-            background-color: white;
-        }
-        .sidebar {
-            width: 200px;
-            background-color: #ecf0f1;
-        }
-        .content {
-            flex-grow: 1;
-            padding: 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .section {
-            display: none;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-        .section.active {
-            display: block;
-        }
-        h1 { 
-            color: white
-        }
-        h2, h3 {
-            color: #2c3e50;
-        }
-        h2 {
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 0.5rem;
-            margin-top: 2rem;
-        }
-        .experience {
-            margin-bottom: 2rem;
-            padding: 1rem;
-            background-color: #f9f9f9;
-            border-radius: 4px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 1rem;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sachin Kishan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<style>
+  :root {
+    --bg: #f7f5f0; --fg: #1a1814; --muted: #6b6760;
+    --border: #d8d4cc; --card: #ffffff; --hover: #f0ece4;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --mono: 'DM Mono', monospace; --sans: 'DM Sans', system-ui, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 15px; line-height: 1.7; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(247,245,240,0.95); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 50px;
+  }
+  .nav-name { font-family: var(--serif); font-size: 1rem; cursor: pointer; }
+  .nav-links { display: flex; gap: 0; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em;
+    text-decoration: none; color: var(--muted);
+    padding: 0 1rem; height: 50px; display: flex; align-items: center;
+    border-left: 1px solid var(--border);
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-links a:hover, .nav-links a.active { background: var(--hover); color: var(--fg); }
+
+  .page { display: none; }
+  .page.active { display: block; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 2rem; }
+
+  /* HERO — three columns: photo | name+links | bio */
+  #hero {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+    min-height: 280px;
+  }
+  .hero-photo {
+    border-right: 1px solid var(--border);
+    overflow: hidden;
+  }
+  /* ✏️ Replace images/profile.jpg with your actual photo */
+  .hero-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+    display: block;
+  }
+  .hero-left { padding: 2.5rem 2rem 2.5rem; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: space-between; }
+  .hero-right { padding: 2.5rem 0 2.5rem 2rem; }
+  .hero-kicker { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+  h1 { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 2.8rem); line-height: 1.08; margin-bottom: 0; }
+  h1 em { font-style: italic; }
+  .hero-links { display: flex; flex-direction: column; gap: 0; margin-top: auto; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+  .hero-link { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; text-decoration: none; color: var(--muted); padding: 0.45rem 0; transition: color 0.15s; }
+  .hero-link:hover { color: var(--fg); }
+  .bio-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+  .bio { font-size: 0.93rem; color: var(--muted); line-height: 1.8; }
+  .bio p + p { margin-top: 0.8rem; }
+
+  .section-bar { display: flex; align-items: center; border-bottom: 1px solid var(--border); padding: 0.6rem 0; margin-top: 2.5rem; }
+  .section-bar-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+  .tab-row { border-bottom: 1px solid var(--border); overflow: hidden; }
+  .tab-header { cursor: pointer; transition: background 0.12s; user-select: none; }
+  .tab-header:hover { background: var(--hover); }
+  .tab-header-inner { display: flex; align-items: baseline; gap: 1.5rem; padding: 0.85rem 0; }
+  .tab-date { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); min-width: 80px; flex-shrink: 0; }
+  .tab-title { font-size: 0.95rem; flex: 1; }
+  .tab-meta { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); flex-shrink: 0; max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tab-arrow { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); margin-left: 0.8rem; flex-shrink: 0; transition: transform 0.2s; display: inline-block; }
+  .tab-row.open .tab-arrow { transform: rotate(90deg); }
+  .tab-body { max-height: 0; overflow: hidden; transition: max-height 0.32s ease; }
+  .tab-body-inner { padding: 0 0 1.4rem 0; display: grid; grid-template-columns: 80px 1fr; gap: 0 1.5rem; }
+  .tab-content { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
+  .tab-content p + p { margin-top: 0.7rem; }
+  .tab-content a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
+  .tab-content a:hover { color: var(--muted); }
+  .tab-links { display: flex; gap: 1.2rem; flex-wrap: wrap; margin-top: 0.9rem; }
+  .tab-links a { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.04em; color: var(--fg); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; transition: border-color 0.15s; }
+  .tab-links a:hover { border-color: var(--fg); }
+  .tag-pill { display: inline-block; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: 2px; margin-right: 0.4rem; background: #ede9df; color: var(--muted); }
+  .tag-pill.award   { background: #fff3e0; color: #a05000; }
+  .tag-pill.paper   { background: #e8f0fe; color: #1a47a3; }
+  .tag-pill.talk    { background: #f3e8ff; color: #6b21a8; }
+  .tag-pill.position { background: #e8f5e9; color: #2a6e30; }
+
+  .blog-row { border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 80px 1fr auto; gap: 1.5rem; align-items: baseline; padding: 0.85rem 0; cursor: pointer; transition: background 0.12s; }
+  .blog-row:hover { background: var(--hover); }
+  .blog-row-date { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); }
+  .blog-row-title { font-size: 0.95rem; }
+  .blog-row-excerpt { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); max-width: 260px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  #page-post { padding-bottom: 4rem; }
+  .post-back { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--muted); cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; padding: 1.2rem 0; transition: color 0.15s; }
+  .post-back:hover { color: var(--fg); }
+  .post-header { padding: 2rem 0 2.5rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
+  .post-date { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); margin-bottom: 0.8rem; }
+  .post-title { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.15; }
+  .post-body { max-width: 640px; font-size: 1rem; line-height: 1.85; color: #3a3630; }
+  .post-body p { margin-bottom: 1.2rem; }
+  .post-body h2 { font-family: var(--serif); font-size: 1.5rem; margin: 2.5rem 0 0.8rem; color: var(--fg); }
+  .post-body h3 { font-family: var(--serif); font-size: 1.2rem; margin: 2rem 0 0.6rem; color: var(--fg); }
+  .post-body a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
+  .post-body a:hover { color: var(--muted); }
+  .post-body strong { font-weight: 500; color: var(--fg); }
+  .post-body code { font-family: var(--mono); font-size: 0.84em; background: var(--hover); padding: 0.15em 0.4em; border-radius: 2px; }
+  .post-body pre { background: #1a1814; color: #f0ece4; padding: 1.3rem; border-radius: 3px; overflow-x: auto; margin: 1.5rem 0; }
+  .post-body pre code { background: none; padding: 0; font-size: 0.83rem; line-height: 1.65; }
+  .post-body blockquote { border-left: 2px solid var(--border); padding-left: 1.2rem; color: var(--muted); margin: 1.5rem 0; font-style: italic; }
+  .post-body img { max-width: 100%; border: 1px solid var(--border); border-radius: 2px; margin: 1.5rem 0; display: block; }
+  .post-body ul, .post-body ol { padding-left: 1.4rem; margin-bottom: 1.2rem; }
+  .post-body li { margin-bottom: 0.3rem; }
+  .post-body hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .post-body .katex-display { overflow-x: auto; margin: 1.5rem 0; }
+
+  #cv-row { border-bottom: 1px solid var(--border); padding: 1.4rem 0; display: flex; align-items: center; gap: 1.5rem; }
+  .cv-label { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); min-width: 80px; }
+  .cv-desc { font-size: 0.9rem; flex: 1; color: var(--muted); }
+  .btn { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.05em; padding: 0.45rem 1rem; text-decoration: none; border-radius: 2px; transition: all 0.15s; }
+  .btn-solid { background: var(--fg); color: var(--bg); }
+  .btn-solid:hover { opacity: 0.8; }
+
+  footer { border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
+  .empty-msg { padding: 1rem 0; font-size: 0.88rem; color: var(--muted); }
+
+  @media (max-width: 700px) {
+    #hero { grid-template-columns: 1fr; }
+    .hero-photo { height: 240px; border-right: none; border-bottom: 1px solid var(--border); }
+    .hero-left { border-right: none; border-bottom: 1px solid var(--border); }
+    .hero-links { flex-direction: row; gap: 1rem; }
+    nav { padding: 0 1rem; }
+    .nav-links a { padding: 0 0.6rem; }
+    .tab-body-inner { grid-template-columns: 1fr; }
+    .blog-row { grid-template-columns: 70px 1fr; }
+    .blog-row-excerpt { display: none; }
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Sachin Arvind Kishan</h1>
-            <p>B.Tech - Computer Science and Engineering</p>
-        </header>
-        <nav>
-            <a href="#" onclick="showSection('who-am-i')">Who am I?</a>
-            <a href="#" onclick="showSection('education')">Education</a>
-            <a href="#" onclick="showSection('experience')">Experience</a>
-            <a href="#" onclick="showSection('projects')">Projects</a>
-            <a href="#" onclick="showSection('skills')">Skills</a>
-            <a href="#" onclick="showSection('achievements')">Achievements</a>
-            <a href="#" onclick="downloadCV()">Resume</a>
-        </nav>
-        <main>
-            <div class="content">
-                <section id="who-am-i" class="section active">
-                    <h2>Who am I?</h2>
-                    <div style="display: flex; align-items: center;">
-                        <img src="Sachin-Kishan-PHOTO.png" alt="Sachin Arvind Kishan" style="margin-right: 2rem; border-radius: 50%;">
-                        <div>
-                            <p>I am a recent undergraduate in computer science from India.</p>
-                            <p>I have experience in programming for games, graphics and simulations.</p>
-                            <p>Email: sachinkishan02@gmail.com</p>
-                            <p><a href="https://github.com/SachinKishan" target="_blank">GitHub</a> | <a href="https://www.linkedin.com/in/sachin-kishan-graphics/" target="_blank">LinkedIn</a></p>
-                        </div>
-                    </div>
-                </section>
-                
-                <section id="education" class="section">
-                    <h2>Education</h2>
-                    <table>
-                        <tr>
-                            <th>Degree/Certificate</th>
-                            <th>Institute/Board</th>
-                            <th>CGPA/Percentage</th>
-                            <th>Year</th>
-                        </tr>
-                        <tr>
-                            <td>B.Tech.CSE</td>
-                            <td>Vellore Institute of Technology</td>
-                            <td>8.70 </td>
-                            <td>2020-2024</td>
-                        </tr>
-                        <tr>
-                            <td>High School</td>
-                            <td>CBSE Board(India)</td>
-                            <td>91.0%</td>
-                            <td>2020</td>
-                        </tr>
-                    </table>
-                </section>
-                
-                <section id="experience" class="section">
-                    <h2>Career Experience</h2>
-                    <div class="experience">
-                        <h3>Massachusetts Institute of Technology - Summer Geometry Initiative</h3>
-                        <p><strong>Research Fellow</strong> | Remote | Jul. 2024 - Aug. 2024</p>
-                        <p>6 weeks of intensive geometry processing research, working with researchers from MIT, Stanford and Delft.</p>
-                        <p>This program had a 3-4% acceptance rate.</p>
-                        <ul>
-                            <li>Researched and programmed a prototype of splines whose arc length can be calculated analytically while retaining continuity properties</li>
-                            <li>Researched and implemented GPU applied geometry processing applications using RXMesh. <a href="https://github.com/owensgroup/RXMesh/blob/main/apps/ARAP/arap.cu" target="_blank">GitHub link</a></li>
-                            <li>Researched and implemented global intersection analysis, a cloth collision resolution technique. <a href="https://github.com/sara-samy/global_intersection_analysis_sgi2024" target="_blank">GitHub link</a></li>
-                            <li>Implemented an open source shadertoy and web viewer for Chladni Patterns. <a href="https://github.com/CDInstitute/3DChladni" target="_blank">GitHub link</a></li>
-                        </ul>
-                    </div>
-                    <div class="experience">
-                        <h3>Mimyk (IISC incubated deep tech company)</h3>
-                        <p><strong>Research Intern</strong> | Bangalore | Jan. 2024 - Jul. 2024</p>
-                        <p>Developed a working implementation and verification of a patent in C++ from scratch, combining FEM and XPBD methods for real-time simulation and rendering for soft bodies in haptic simulations aimed to run at 1000 frames per second.</p>
-                        <p>The patent can be seen here: <a href="https://patents.google.com/patent/US20230061175A1/en" target="_blank">Patent link</a> </p>
-                    </div>
-                    <div class="experience">
-                        <h3>DevLaunchers (Non-profit)</h3>
-                        <p><strong>Game Developer for DevBots</strong> | Remote | Oct. 2021 - Jul. 2022</p>
-                        <ul>
-                            <li>Developed a modular ability system in Unity using Scriptable Objects that cut down development time and allowed for greater focus on game design for customized features. Made a week-long endeavor into an hour-long task.</li>
-                            <li>Developed an animation system and art asset pipeline for artists to test and integrate animation into the game.</li>
-                            <li>Extensively documented code and usage for designers and future contributors.</li>
-                            <li>Aided the development of a modular collision system that could easily be used anywhere for game-play features needing collisions.</li>
-                            <li>All the source code and the many write-ups I did for documentation are <a href="https://github.com/dev-launchers/devbots__general/wiki" target="_blank">here</a>. </li>
-                        </ul>
-                    </div>
-                    <div class="experience">
-                        <h3>
-                            <a href="https://www.ncoregames.com/"></a>
-                            Studio nCore Pvt. Ltd
-                        </a>
-                        </h3>
-                        <p><strong>Game Developer Internship</strong> | Remote | June 2022 - Jul. 2022</p>
-                        <ul>
-                            <li>Was assigned under the team working on a Disney-funded project.</li>
-                            <li>I worked a on their flagship cricketing game, a Disney-funded project. I implemented a simple daily rewards game design tool that could be used in a variety of different games as a Unity package. This allowed designers to easily add it to their games and provide varying rewards to users when they login to their games based on certain parameters. </li>
-                            <li>Developed multiplayer game prototypes in Unity using the Photon framework.</li>
-                        </ul>
-                    </div>
-                    <div class="experience">
-                        <h3>P1 (Non-profit)</h3>
-                        <p><strong>Remote Game Developer (Part Time)</strong> | June 2023 - Dec. 2023</p>
-                        <ul>
-                            <li>Researched methods to optimize mesh generation and rendering for large dynamic voxel worlds.</li>
-                            <li>Worked on several gameplay-related tasks and bugs within a large developed code base.</li>
-                            <li>Worked closely with artists to fix model and UV mapping issues for shader development within Unity.</li>
-                            <li>Introduced and guided at least 20 new members to join and start contributing to the programming team.</li>
-                            <li>All the source code I made for documentation are <a href="https://github.com/dev-launchers/devbots__general/wiki" target="_blank">here</a>. </li>
-                        </ul>
-                    </div>
-                </section>
-                
-                <section id="projects" class="section">
-                    <h2>Projects</h2>
-                    <div class="experience">
-                        <h3>Narrative Game Engine (C++)</h3>
-                        <p>A game engine written in C++ that acts as a tool for writers to create interactive narrative games in 3D worlds easily. </p>
-                        <p>Features an event system, OpenGL renderer, file scene saving system, scene editing and more in development.</p>
-                        <p>The game engine is currently open source, and taking in contributions.</p>
-                        <p>
-                            <strong>Why open source? </strong><br>
-                            My undergraduate institution had very little games and graphics work, especially when it came to developing systems for native applications. My goal in open sourcing the game engine is to provide greater access to learning and developing an application. At the moment, I actively mentor and support anyone who wants to contribute.
-                        </p>
-                        
-                        <p><a href="https://github.com/SachinKishan/Narrative-Engine" target="_blank">GitHub link</a></p>
-                    </div>
-                    <div class="experience">
-                        <h3>Rasterizer (C++)</h3>
-                        <p>C++ rasterizer which includes camera clipping, renders cubes at different orientations and transforms, matrix operations library.</p>
-                        <p>
-                            <strong>Why?</strong><br>
-                            The main goal of developing the simple rasteriser was to learn the fundamental ideas involved in drawing pixels as well as how I could organise a basic rendering framework.
-                        </p>
-                        <p><a href="https://github.com/SachinKishan/Rasteriser" target="_blank">GitHub link</a></p>
-                    </div>
-                    <div class="experience">
-                        <h3>Ray Tracer (C++)</h3>
-                        <p>Wrote a Monte Carlo path tracer from scratch. Can apply different materials on spheres such as metals, diffuse objects and semi-transparent objects. Includes point lights, area lights, shadows, and supports multiple lights in a single scene.</p>
-                        <p><a href="https://github.com/SachinKishan/RT" target="_blank">GitHub link</a></p>
-                    </div>
-                </section>
-                
-                <section id="skills" class="section">
-                    <h2>Technical Skills</h2>
-                    <ul>
-                        <li><strong>Programming:</strong> C#, C, C++, HLSL, Python</li>
-                        <li><strong>Graphics APIs:</strong> OpenGL </li>
-                        <li><strong>Mathematics:</strong> Linear algebra, Calculus, Differential Calculus, Physics programming</li>
-                    </ul>
-                </section>
-                
-                <section id="achievements" class="section">
-                    <h2>Achievements</h2>
-                    <ul>
-                        <li><strong>MIT SGI Fellow(2024):</strong> A research fellowship awarded for students to take part in 6 weeks of intensive geoemtry processing research. </li>
-                        <li><strong>IGDAF Scholar (2023):</strong> Awarded to students showing potential for a career in game development. Only 3% of total applicants receive the award.</li>
-                        <li><strong>IGDAF Alumni GDC Scholarship (2024):</strong> Invited with an all-access complimentary pass to Game Developers Conference in 2024.</li>
-                        <li><strong>SGI Training Week (2023):</strong> Invited to the training week of SGI - a summer school hosted by MIT that teaches the foundations of geometry processing (was accepted to the entire program in the 2024 cohort).</li>
-                        <li><strong>VIT Chancellor's Special Achiever Award (2021):</strong> Awarded to 0.5% of students in VIT for outstanding achievement in college representation at events.</li>
-                    </ul>
-                    <h3>Extra Curricular Roles and Achievements</h3>
-                    <ul>
-                        <li><strong>Equity Committee Role:</strong> Served as a dedicated member of the Vellore Institute of Technology's Debate Society's Equity Committee.</li>
-                        <ul>
-                            <li>Actively involved in conflict resolution and prevention between different parties and groups within the society, especially over contentious actions and discussions involving identity.</li>
-                            <li>Held sessions for new members, introducing them to the concept of equity and navigating contentious discussion while not using identity and ad-hominem as a basis for argument and discourse.</li>
-                        </ul>
-                        <li><strong>Breaking Team at UADC:</strong> 
-                        
-                            Part of the second highest-ranked Indian team in UADC (Asia's largest debate tournament) in 2021 and the first to get to knockout rounds from VIT.</li>
-                    </ul>
-                </section>
-            </div>
-        </main>
-        <footer>
-            <p>&copy; 2024 Sachin Arvind Kishan. All rights reserved.</p>
-        </footer>
+
+<nav>
+  <span class="nav-name" onclick="showPage('home')">Sachin Kishan</span>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')" id="nav-home">Home</a></li>
+    <li><a href="#" onclick="showPage('blog')" id="nav-blog">Writing</a></li>
+    <li><a href="#" onclick="showPage('home');setTimeout(()=>document.getElementById('cv').scrollIntoView({behavior:'smooth'}),50)" id="nav-cv">CV</a></li>
+  </ul>
+</nav>
+
+<div id="page-home" class="page active">
+<div class="wrap">
+
+  <div id="hero">
+
+    <!-- PHOTO — put your image at images/profile.jpg -->
+    <div class="hero-photo">
+      <img src="images/profile.jpg" alt="Sachin Kishan"
+           onerror="this.parentElement.style.background='var(--hover)';this.style.display='none'">
     </div>
 
-    <script>
-        function showSection(sectionId) {
-            const sections = document.getElementsByClassName('section');
-            for (let section of sections) {
-                section.classList.remove('active');
-            }
-            document.getElementById(sectionId).classList.add('active');
-        }
+    <!-- NAME + LINKS -->
+    <div class="hero-left">
+      <div>
+        <div class="hero-kicker">PhD Student · NYU Courant · CS</div>
+        <h1>Sachin<br><em>Kishan</em></h1>
+      </div>
+      <div class="hero-links">
+        <!-- ✏️ edit your links -->
+        <a class="hero-link" href="mailto:sak9889@nyu.edu">sak9889@nyu.edu</a>
+        <a class="hero-link" href="https://www.linkedin.com/in/sachin-kishan-graphics/" target="_blank">LinkedIn</a>
+        <a class="hero-link" href="https://github.com/SachinKishan" target="_blank">GitHub</a>
+      </div>
+    </div>
 
-        function downloadCV() {
-            window.location.href = 'General_Resume.pdf';
-        }
-    </script>
+    <!-- BIO -->
+    <div class="hero-right">
+      <div class="bio-label">About</div>
+      <!-- ✏️ edit your bio -->
+      <div class="bio">
+        <p>I do research in the field of geometry processing and simulation.</p>
+        <p>I am currently a first year computer science PhD student at NYU Courant. I am advised by Professor Daniele Panozzo and Professor Denis Zorin.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="news">
+    <div class="section-bar"><span class="section-bar-label">News</span></div>
+    <div id="news-list"></div>
+  </div>
+
+  <div id="research">
+    <div class="section-bar"><span class="section-bar-label">Research &amp; Projects</span></div>
+    <div id="projects-list"></div>
+  </div>
+
+  <div id="writing-preview">
+    <div class="section-bar">
+      <span class="section-bar-label">Recent writing</span>
+      <span style="margin-left:auto;font-family:var(--mono);font-size:0.68rem;color:var(--muted);cursor:pointer" onclick="showPage('blog')">all posts →</span>
+    </div>
+    <div id="blog-preview-list"></div>
+  </div>
+
+  <div id="cv">
+    <div class="section-bar"><span class="section-bar-label">CV</span></div>
+    <div id="cv-row">
+      <span class="cv-label">Resume: </span>
+      <span class="cv-desc">Document of past work, research and experience </span>
+      <!-- ✏️ replace cv.pdf with your actual file -->
+      <a class="btn btn-solid" href="cv.pdf" download>Download PDF</a>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div id="page-blog" class="page">
+<div class="wrap">
+  <div style="padding:3rem 0 0">
+    <div style="font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem">Writing</div>
+    <div style="font-family:var(--serif);font-size:2.4rem;margin-bottom:2.5rem;border-bottom:1px solid var(--border);padding-bottom:1.5rem">All posts</div>
+    <div id="blog-full-list"></div>
+  </div>
+</div>
+</div>
+
+<div id="page-post" class="page">
+<div class="wrap">
+  <div class="post-back" onclick="showPage('blog')">← back to writing</div>
+  <div class="post-header">
+    <div class="post-date" id="post-date"></div>
+    <div class="post-title" id="post-title"></div>
+  </div>
+  <div class="post-body" id="post-body"></div>
+</div>
+</div>
+
+<footer>
+  <span>Sachin Kishan</span>
+  <span>sak9889@nyu.edu</span>
+</footer>
+
+<script>
+marked.setOptions({ breaks: true, gfm: true });
+
+let news = [], projects = [], allPosts = [];
+
+async function fetchJSON(url) {
+  try { const r = await fetch(url); if (!r.ok) return null; return await r.json(); }
+  catch { return null; }
+}
+async function loadNews() {
+  const manifest = await fetchJSON('news/index.json') || [];
+  const items = await Promise.all(manifest.map(f => fetchJSON('news/' + f)));
+  news = items.filter(Boolean);
+  renderNews();
+}
+async function loadProjects() {
+  const manifest = await fetchJSON('projects/index.json') || [];
+  const items = await Promise.all(manifest.map(f => fetchJSON('projects/' + f)));
+  projects = items.filter(Boolean);
+  renderProjects();
+}
+
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  if (name === 'blog' || name === 'post') document.getElementById('nav-blog').classList.add('active');
+  else document.getElementById('nav-home').classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function parseFrontmatter(raw) {
+  const match = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if (!match) return { meta: {}, content: raw };
+  const meta = {};
+  match[1].split('\n').forEach(line => {
+    const [k, ...v] = line.split(':');
+    if (k && v.length) meta[k.trim()] = v.join(':').trim();
+  });
+  return { meta, content: match[2] };
+}
+
+async function loadPosts() {
+  const manifest = await fetchJSON('posts/index.json') || [];
+  const results = [];
+  for (const filename of manifest) {
+    try {
+      const res = await fetch('posts/' + filename);
+      if (!res.ok) continue;
+      const raw = await res.text();
+      const { meta, content } = parseFrontmatter(raw);
+      results.push({ title: meta.title||filename, date: meta.date||'', excerpt: meta.excerpt||'', content, file: filename });
+    } catch { continue; }
+  }
+  results.sort((a,b) => b.date > a.date ? 1 : -1);
+  allPosts = results;
+  renderBlogPreview();
+  renderBlogFull();
+}
+
+function renderMarkdown(md) {
+  const blocks = [], inlines = [];
+  md = md.replace(/\$\$([\s\S]*?)\$\$/g, (_,tex) => { const id='MB'+blocks.length; blocks.push({id,tex}); return id; });
+  md = md.replace(/\$(.*?)\$/g, (_,tex) => { const id='MI'+inlines.length; inlines.push({id,tex}); return id; });
+  let html = marked.parse(md);
+  blocks.forEach(({id,tex}) => { try { html=html.replace(id,katex.renderToString(tex,{displayMode:true,throwOnError:false})); } catch { html=html.replace(id,'<code>'+tex+'</code>'); } });
+  inlines.forEach(({id,tex}) => { try { html=html.replace(id,katex.renderToString(tex,{throwOnError:false})); } catch { html=html.replace(id,'<code>'+tex+'</code>'); } });
+  return html;
+}
+
+function openPost(idx) {
+  const p = allPosts[idx];
+  document.getElementById('post-date').textContent = p.date;
+  document.getElementById('post-title').textContent = p.title;
+  document.getElementById('post-body').innerHTML = renderMarkdown(p.content);
+  showPage('post');
+}
+function renderBlogPreview() {
+  const el = document.getElementById('blog-preview-list');
+  if (!allPosts.length) { el.innerHTML = '<div class="empty-msg">No posts yet.</div>'; return; }
+  el.innerHTML = allPosts.slice(0,3).map((p,i) => `<div class="blog-row" onclick="openPost(${i})"><span class="blog-row-date">${p.date}</span><span class="blog-row-title">${p.title}</span><span class="blog-row-excerpt">${p.excerpt}</span></div>`).join('');
+}
+function renderBlogFull() {
+  const el = document.getElementById('blog-full-list');
+  if (!allPosts.length) { el.innerHTML = '<div class="empty-msg">No posts yet.</div>'; return; }
+  el.innerHTML = allPosts.map((p,i) => `<div class="blog-row" onclick="openPost(${i})"><span class="blog-row-date">${p.date}</span><span class="blog-row-title">${p.title}</span><span class="blog-row-excerpt">${p.excerpt}</span></div>`).join('');
+}
+
+function makeRow({ date, tag, title, meta, body, links }) {
+  const id = 'r' + Math.random().toString(36).slice(2);
+  const tagHtml = tag ? `<span class="tag-pill ${tag}">${tag}</span> ` : '';
+  const linksHtml = links?.length ? `<div class="tab-links">${links.map(l=>`<a href="${l.url}" target="_blank">${l.label} ↗</a>`).join('')}</div>` : '';
+  const hasBody = (body && body.trim()) || linksHtml;
+  const arrow = hasBody ? `<span class="tab-arrow">›</span>` : '';
+  return `<div class="tab-row" id="${id}">
+    <div class="tab-header" ${hasBody?`onclick="toggle('${id}')"`:''}><div class="tab-header-inner">
+      <span class="tab-date">${date||''}</span>
+      <span class="tab-title">${tagHtml}${title}</span>
+      ${meta?`<span class="tab-meta">${meta}</span>`:''}
+      ${arrow}
+    </div></div>
+    ${hasBody?`<div class="tab-body"><div class="tab-body-inner"><div></div><div class="tab-content">${body||''}${linksHtml}</div></div></div>`:''}
+  </div>`;
+}
+function toggle(id) {
+  const row = document.getElementById(id);
+  const body = row.querySelector('.tab-body');
+  if (!body) return;
+  const isOpen = row.classList.contains('open');
+  row.classList.toggle('open', !isOpen);
+  body.style.maxHeight = isOpen ? '0' : body.scrollHeight + 'px';
+}
+function emptyMsg(id, msg) { document.getElementById(id).innerHTML = `<div class="empty-msg">${msg}</div>`; }
+function renderNews() {
+  const el = document.getElementById('news-list');
+  if (!news.length) return emptyMsg('news-list', 'No news yet.');
+  el.innerHTML = news.map(n => makeRow({ date:n.date, tag:n.tag, title:n.title, body:n.body })).join('');
+}
+function renderProjects() {
+  const el = document.getElementById('projects-list');
+  if (!projects.length) return emptyMsg('projects-list', 'No projects yet.');
+  el.innerHTML = projects.map(p => {
+    const pills = p.tags?.map(t=>`<span class="tag-pill">${t}</span>`).join('')||'';
+    const bodyFull = pills ? `<div style="margin-bottom:.6rem">${pills}</div>${p.body||''}` : (p.body||'');
+    return makeRow({ title:p.title, meta:p.venue, body:bodyFull, links:p.links });
+  }).join('');
+}
+
+loadNews(); loadProjects(); loadPosts();
+</script>
 </body>
 </html>
