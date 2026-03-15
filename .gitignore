@@ -1,0 +1,9 @@
+# Local blog editor — never push this to GitHub
+editor.html
+
+ 
+# OS
+.DS_Store
+Thumbs.db
+  
+
